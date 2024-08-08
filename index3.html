@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Fetch</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <table>
+        <thead></thead>
+    <tbody id="data">
+    </tbody>
+    </table>
+    <div class="header">
+        <h1>เตือนภัยช้างป่า</h1>
+    </div>
+
+    <h1> รูปภาพล่าสุด (เวลา*******)</h1>
+    <img src="frame.jpg" alt="">
+
+<div id = "section1" class = "change_graph">
+    <a href="index.html#section1"><h2>graph1</h2></a>
+    <a href="index2.html#section1"><h2>graph2</h2></a>
+    <a href="index3.html#section1"><h2>graph3</h2></a>
+</div>
+    <div class="graph">
+        <canvas id="myChart2" width="400" height="200"></canvas>
+    </div>
+
+    <script>
+        fetch("https://sheet.best/api/sheets/b734ca4f-2076-40f4-be9a-4ba5c056c162")
+        .then(response => response.json())
+        .then(data => {
+            if (data.length > 0) {
+                var temp = "";
+                var leftData = [];
+                var rightData = [];
+                var threeData =[];
+                var fourData =[];
+                data.forEach((u) => {
+                    /*temp += "<tr>";
+                    temp += "<td>" + u.time + "</td>";
+                    temp += "<td>" + u.T + "</td>";
+                    temp += "</tr>";*/
+                    leftData.push(u.time);
+                    rightData.push(u.T);
+                    threeData.push(u.H); // new array for column three
+                    fourData.push(u.P); // new array for column four
+                })
+                document.getElementById("data").innerHTML = temp;
+                const ctx2 = document.getElementById('myChart2').getContext('2d');
+const myChart2 = new Chart(ctx2, {
+    type: 'line',
+    data: {
+        labels: leftData,
+        datasets: [{
+            label: 'Three vs Four',
+            data: threeData,
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+const ctx3 = document.getElementById('myChart3').getContext('2d');
+const myChart3 = new Chart(ctx3, {
+    type: 'line',
+    data: {
+        labels: leftData,
+        datasets: [{
+            label: 'Three vs Four',
+            data: fourData,
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+            }
+        });
+    </script>
+</body>
+</html>

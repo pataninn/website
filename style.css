@@ -1,0 +1,61 @@
+html, body {
+  margin: 0;
+  height: 100%;
+}
+/************header*************/
+
+.header{
+  background: rgb(5, 85, 5);
+  color: aliceblue;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-align: center;
+}
+
+
+/*************img******************/
+img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+
+
+
+
+
+/************graph**************/
+.change_graph{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
+}
+.change_graph a {
+  text-decoration: none;
+  color: black;
+  transition: 0.1s;
+}
+.change_graph a:hover{
+  text-decoration: none;
+  color: green;
+}
+
+
+
+.graph{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+canvas {
+  width: 80%;
+}
